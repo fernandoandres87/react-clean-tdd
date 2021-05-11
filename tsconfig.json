@@ -9,11 +9,11 @@
       "esModuleInterop": true,
       "module": "esnext",
       "moduleResolution": "node",
-      "jsx": "react",
+      "jsx": "react-jsx",
       "rootDir": "src",
       "baseUrl": "src",
       "paths": {
-        "@/*": ["User/*"]
+        "@/*": ["*"]
       },
       "allowJs": true,
       "resolveJsonModule": true,
