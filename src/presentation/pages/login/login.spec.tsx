@@ -31,6 +31,12 @@ const simulateValidSubmit = (sut: RenderResult, email = faker.internet.email(), 
   fireEvent.click(submitButton)
 }
 
+const simulateStatusForField = (sut: RenderResult, fieldName: string, validationError?: string): void => {
+  const emailStatus = sut.getByTestId(`${fieldName}-status`)
+  expect(emailStatus.title).toBe(validationError || 'Todo correcto')
+  expect(emailStatus.textContent).toBe(validationError ? '🔴' : '🟢')
+}
+
 const populateEmailField = (sut: RenderResult, email = faker.internet.email()): void => {
   const emailInput = sut.getByTestId('email')
   fireEvent.input(emailInput, { target: { value: email } })
@@ -39,12 +45,6 @@ const populateEmailField = (sut: RenderResult, email = faker.internet.email()): 
 const populatePasswordField = (sut: RenderResult, password = faker.internet.password()): void => {
   const passwordInput = sut.getByTestId('password')
   fireEvent.input(passwordInput, { target: { value: password } })
-}
-
-const simulateStatusForField = (sut: RenderResult, fieldName: string, validationError?: string): void => {
-  const emailStatus = sut.getByTestId(`${fieldName}-status`)
-  expect(emailStatus.title).toBe(validationError || 'Todo correcto')
-  expect(emailStatus.textContent).toBe(validationError ? '🔴' : '🟢')
 }
 
 describe('Login Component', () => {
@@ -111,5 +111,12 @@ describe('Login Component', () => {
       email,
       password
     })
+  })
+
+  test('should call Authentication only once', () => {
+    const { sut, authenticationSpy } = makeSut()
+    simulateValidSubmit(sut)
+    simulateValidSubmit(sut)
+    expect(authenticationSpy.callsCount).toBe(1)
   })
 })
