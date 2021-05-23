@@ -1,18 +1,16 @@
 import { InvalidFieldError } from '@/validation/errors'
-import { FieldValidation } from '@/validation/protocols/field-validation'
+import { MinLengthValidation } from './min-length-validation'
 
-class MinLengthValidation implements FieldValidation {
-  constructor (readonly field: string,
-    private readonly minLength: number) {}
-
-  validate (value: string): Error {
-    return new InvalidFieldError()
-  }
-}
 describe('MinLengthValidation', () => {
   test('should return error if value is invalid', () => {
     const sut = new MinLengthValidation('field', 5)
     const error = sut.validate('123')
     expect(error).toEqual(new InvalidFieldError())
+  })
+
+  test('should return falsy if value is valid', () => {
+    const sut = new MinLengthValidation('field', 5)
+    const error = sut.validate('12345')
+    expect(error).toBeFalsy()
   })
 })
