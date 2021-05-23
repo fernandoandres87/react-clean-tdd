@@ -5,6 +5,7 @@ type SutTypes = {
   sut: ValidationComposite
   fieldValidationsSpy: FieldValidationSpy[]
 }
+
 const makeSut = (): SutTypes => {
   const fieldValidationsSpy = [
     new FieldValidationSpy('any_field'),
