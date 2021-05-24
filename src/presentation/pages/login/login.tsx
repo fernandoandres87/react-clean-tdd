@@ -3,7 +3,9 @@ import { Link, useHistory } from 'react-router-dom'
 import Styles from './login.styles.scss'
 import { Footer, Input, LoginHeader, FormStatus } from '@/presentation/components'
 import Context from '@/presentation/contexts/form/form-context'
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { Validation } from '@/presentation/protocols/validation'
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { Authentication } from '@/domain/usecases'
 
 type Props = {
